@@ -1,5 +1,5 @@
 {
-  "name": "@meteor/truck-logger",
+  "name": "@meteor-labs/truck-logger",
   "version": "1.0.0",
   "description": "<h2 align=\"center\">   <a href=\"http://www.amitmerchant.com/electron-markdownify\"><img src=\"https://img.freepik.com/premium-vector/dump-truck-icon-isolated-white-background_103044-862.jpg?w=1380\" alt=\"truck-logger\" width=\"200\"></a>   <br>   Truck Logger </h2>",
   "main": "index.js",
