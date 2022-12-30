@@ -1,12 +1,11 @@
 
 <h2 align="center">
-  <a href="http://www.amitmerchant.com/electron-markdownify"><img src="https://img.freepik.com/premium-vector/dump-truck-icon-isolated-white-background_103044-862.jpg?w=1380" alt="truck-logger" width="200"></a>
+  <a href="http://www.amitmerchant.com/electron-markdownify"><img src="https://img.freepik.com/premium-vector/dump-truck-icon-isolated-white-background_103044-862.jpg?w=1380" alt="@meteor/truck-logger" width="200"></a>
   <br>
   Truck Logger
 </h2>
 
-<h4 align="center">A minimal Logger built with <a href="https://github.com/winstonjs/winston" target="_blank">Winston</a>.</h4>
-
+<h4 align="center">A minimal Express Logger built with <a href="https://github.com/winstonjs/winston" target="_blank">Winston</a>.</h4>
 <p align="center">
   <a href="#installation">Installation</a> •
   <a href="#how-to-use">How to use</a>
@@ -15,84 +14,75 @@
 
 ### Installation
 <!-- _Below is an example of how you can install and setting your app._ -->
-
 1. Install package
-    <br>
    ```sh
    # using npm
-   npm install truck-logger
+   npm install @meteor/truck-logger
    ```
    ```sh
    # using yarn
-   yarn add truck-logger
+   yarn add @meteor/truck-logger
    ```
-   <br>
 2. Add your MongoDB access to your .env
-    <br>
    ```js
-    DB_LOG_HOST=
-    DB_LOG_PORT=
-    DB_LOG_USER=
-    DB_LOG_PASSWORD=
+    TRUCK_DB_HOST=
+    TRUCK_DB_PORT=
+    TRUCK_DB_USER=
+    TRUCK_DB_PASSWORD=
    ```
 
 ### How To Use
 
-To use truck logger you must add ```truckMiddleware``` on your API routes:
+To use truck-logger add ```truckExpress``` to your API Route. Here is an example:
 
-##### truckMiddleware
 ```js
-const { truckMiddleware } = require('truck-logger');
+const { truckExpress } = require('@meteor/truck-logger');
 
-app.get('/products', truckMiddleware('log-collection'), ...);
+app.get('/truck/number/1', truckExpress('truck_1_collection'), ...);
 
 // or
 
-router.post('/products', truckMiddleware('log-collection'), ...);
+router.get('/truck/number/1', truckExpress('truck_1_collection'), ...);
 ```
-or .. if you prefer your own winston instance:
-```js
-const { truckMiddleware, useWinston } = require('truck-logger');
+and.. That`s it!! 🦀
 
-app.get('/products', truckMiddleware('log-collection',
-  {
-    useTruck: useWinston.createLogger({
-      transports: [
-        new useWinston.transports.Console(),
-        new useWinston.transports.File({ filename: 'combined.log' })
-      ]
-    }),
-  }
-), ...)
-```
-##### truck
-then you can use it like this:
-```js
-const { truck } = require('truck-logger');
+As default ```truckExpress``` will be generated request result for you, which is log console & log data on MongoDB along with default meta info inside. Like this:
 
-const productController = () => {
+<img width="1089" alt="ss_1" src="https://user-images.githubusercontent.com/5293897/210051861-6a3706c0-60be-4814-af8d-64a107f34559.png">
+<img style="margin-bottom:24px" width="654" alt="ss_2" src="https://user-images.githubusercontent.com/5293897/210051865-ed240599-a38c-4b7e-bf86-6ac1694ceb27.png">
+
+
+Oh.. If you want to create new log with same ```truckNo (requestId)```. You can do this inside your controller:
+
+<!-- ##### truck(collection) -->
+```js
+const { truck } = require('@meteor/truck-logger');
+
+const truck1Controller = () => {
   ...
 
-  truck().info('Start getting product..')
+  truck().info('The truck is still on its way..')
 
+  truck().warn('Almost there..')
+
+  truck().error('Oops..')
+  
   ...
 };
 ```
-this will be generate
+<img width="1088" alt="Screenshot 2022-12-30 at 16 04 08" src="https://user-images.githubusercontent.com/5293897/210053182-a612fb50-5e93-4202-96db-4f5caf08fe94.png">
+
 
 ## Credits
 
 This package uses the following open source packages:
 
 - [Winston](https://github.com/winstonjs/winston)
+- [Winston-MongoDB](https://github.com/winstonjs/winston-mongodb)
 - [Lodash](https://github.com/lodash/lodash)
+- [Traverse](https://github.com/ljharb/js-traverse)
+- [Klona](https://github.com/lukeed/klona)
 
 ## Support
 
-<a href="#" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/purple_img.png" alt="Buy Me A Coffee" style="height: 41px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;" ></a>
-
-<p>Or</p> 
-
-<a href="#">
-	<img src="https://c5.patreon.com/external/logo/become_a_patron_button@2x.png" width="160">
-</a>
+<a href="https://www.buymeacoffee.com/riodewanto" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/purple_img.png" alt="Buy Me A Coffee" style="height: 41px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;" ></a>
