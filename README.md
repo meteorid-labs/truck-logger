@@ -1,6 +1,6 @@
 
 <h2 align="center">
-  <a href="http://www.amitmerchant.com/electron-markdownify"><img src="https://img.freepik.com/premium-vector/dump-truck-icon-isolated-white-background_103044-862.jpg?w=1380" alt="@meteor/truck-logger" width="200"></a>
+  <a href="https://github.com/meteorid-labs/truck-logger"><img src="https://img.freepik.com/premium-vector/dump-truck-icon-isolated-white-background_103044-862.jpg?w=1380" alt="@meteor-labs/truck-logger" width="200"></a>
   <br>
   Truck Logger
 </h2>
@@ -37,7 +37,7 @@
 To use truck-logger add ```truckExpress``` to your API Route. Here is an example:
 
 ```js
-const { truckExpress } = require('@meteor/truck-logger');
+const { truckExpress } = require('@meteor-labs/truck-logger');
 
 app.get('/truck/number/1', truckExpress('truck_1_collection'), ...);
 
@@ -57,7 +57,7 @@ Oh.. If you want to create new log with same ```truckNo (requestId)```. You can 
 
 <!-- ##### truck(collection) -->
 ```js
-const { truck } = require('@meteor/truck-logger');
+const { truck } = require('@meteor-labs/truck-logger');
 
 const truck1Controller = () => {
   ...
