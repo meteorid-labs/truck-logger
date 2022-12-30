@@ -17,14 +17,15 @@
 1. Install package
    ```sh
    # using npm
-   npm install @meteor/truck-logger
+   npm i @meteor-labs/truck-logger
    ```
    ```sh
    # using yarn
-   yarn add @meteor/truck-logger
+   yarn add @meteor-labs/truck-logger
    ```
 2. Add your MongoDB access to your .env
    ```js
+    TRUCK_REQUEST_KEY= // requestId. default: truckNo
     TRUCK_DB_HOST=
     TRUCK_DB_PORT=
     TRUCK_DB_USER=
