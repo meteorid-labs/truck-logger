@@ -1,0 +1,32 @@
+{
+  "name": "@meteor/truck-logger",
+  "version": "1.0.0",
+  "description": "<h2 align=\"center\">   <a href=\"http://www.amitmerchant.com/electron-markdownify\"><img src=\"https://img.freepik.com/premium-vector/dump-truck-icon-isolated-white-background_103044-862.jpg?w=1380\" alt=\"truck-logger\" width=\"200\"></a>   <br>   Truck Logger </h2>",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "lodash": "^4.17.21",
+    "uuid": "^9.0.0",
+    "winston": "^3.8.2",
+    "winston-mongodb": "^5.1.0",
+    "traverse": "^0.6.7",
+    "klona": "^2.0.5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/meteorid-labs/truck-logger.git"
+  },
+  "keywords": [
+    "logger",
+    "winston",
+    "nodejs"
+  ],
+  "author": "rdp",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/meteorid-labs/truck-logger/issues"
+  },
+  "homepage": "https://github.com/meteorid-labs/truck-logger#readme"
+}
