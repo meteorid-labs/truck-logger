@@ -19,9 +19,13 @@
     "url": "git+https://github.com/meteorid-labs/truck-logger.git"
   },
   "keywords": [
+    "log",
     "logger",
+    "logging",
     "winston",
-    "nodejs"
+    "node",
+    "express",
+    "backend"
   ],
   "author": "rdp",
   "license": "MIT",
