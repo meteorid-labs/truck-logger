@@ -2,17 +2,46 @@
   "name": "@meteor-labs/truck-logger",
   "version": "1.0.1",
   "description": "A minimal Express Logger.",
-  "main": "index.js",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./lib/esm/types/index.d.ts",
+        "default": "./lib/esm/index.mjs"
+      },
+      "require": {
+        "types": "./lib/cjs/types/index.d.ts",
+        "default": "./lib/cjs/index.js"
+      }
+    }
+  },
+  "types": "./lib/cjs/types/index.d.ts",
+  "main": "./lib/cjs/index.js",
+  "files": [
+    "lib/**/*"
+  ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "clean": "rm -rf ./lib",
+    "build": "npm run clean && npm run build:esm && npm run build:cjs",
+    "build:esm": "tsc -p ./configs/tsconfig.esm.json && mv lib/esm/index.js lib/esm/index.mjs",
+    "build:cjs": "tsc -p ./configs/tsconfig.cjs.json",
+    "semantic-release": "semantic-release",
+    "prepack": "npm run build"
   },
   "dependencies": {
+    "klona": "^2.0.5",
     "lodash": "^4.17.21",
+    "traverse": "^0.6.7",
     "uuid": "^9.0.0",
     "winston": "^3.8.2",
-    "winston-mongodb": "^5.1.0",
-    "traverse": "^0.6.7",
-    "klona": "^2.0.5"
+    "winston-mongodb": "^5.1.0"
+  },
+  "release": {
+    "branches": [
+      "main"
+    ]
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "repository": {
     "type": "git",
@@ -32,5 +61,10 @@
   "bugs": {
     "url": "https://github.com/meteorid-labs/truck-logger/issues"
   },
-  "homepage": "https://github.com/meteorid-labs/truck-logger#readme"
+  "homepage": "https://github.com/meteorid-labs/truck-logger#readme",
+  "devDependencies": {
+    "semantic-release": "^19.0.3",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.7.4"
+  }
 }
