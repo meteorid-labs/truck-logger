@@ -16,15 +16,15 @@ const woopies = [
   /^connect\.sid$/
 ];
 
-function redactObject(obj) {
-  traverse(obj).forEach(function redactor() {
+function redactObject(obj: any) {
+  traverse(obj).forEach(function redactor(this: any) {
     if (woopies.some(regex => regex.test(this.key))) {
       this.update("[CLASSIFIED]");
     }
   });
 }
 
-function redactor(obj) {
+export function redactor(obj: any) {
   const copy = klona(obj);
   redactObject(copy);
   const splat = copy[Symbol.for("splat")];
@@ -32,4 +32,3 @@ function redactor(obj) {
   return copy;
 }
 
-module.exports = redactor;
