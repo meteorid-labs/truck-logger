@@ -1,3 +1,3 @@
 var redactor = require('./redactor');
 
-exports.redactor = redactor;
+module.exports = redactor;
