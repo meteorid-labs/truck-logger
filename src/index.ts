@@ -9,6 +9,8 @@ var helper = require('./helper');
 
 interface truckOptionType {
     useTruck?: any;
+    transports?: any;
+    mongodb?: false;
 }
 
 interface truckerType extends LoggerOptions {
@@ -88,6 +90,11 @@ const newMongoTransport = (options) => {
  * TODO: More dynamic setup for default opt
  */
 export function truckExpress(collection: string, options: truckOptionType = {}) {
+    const transports = [new winston.transports.Console(_default.transports)];
+    if (options.mongodb) {
+        transports.push(newMongoTransport(_.merge({ winstonMongoDb: _.merge(collection, _.get(options, 'winstonMongoDb') || {}) }, { mongodb: _.merge(_default.mongodb, _.get(options, 'mongodb') || {}) }, _default.transports)))
+    }
+
     truckContainer.add(collection,
         options.useTruck ||
         _().merge({
@@ -97,10 +104,7 @@ export function truckExpress(collection: string, options: truckOptionType = {}) 
                 timestamp(),
                 _defaultPrintf,
             ),
-            transports: [
-                new winston.transports.Console(_default.transports),
-                newMongoTransport(_.merge({ winstonMongoDb: _.merge(collection, _.get(options, 'winstonMongoDb') || {}) }, { mongodb: _.merge(_default.mongodb, _.get(options, 'mongodb') || {}) }, _default.transports))
-            ],
+            transports,
             exitOnError: false,
         }, _.omit(options, ['winstonMongoDb', 'mongodb'])).value()
     );
