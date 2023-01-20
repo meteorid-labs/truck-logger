@@ -55,9 +55,15 @@ const _default = {
     }
 };
 const _defaultPrintf = printf(({ level, message, timestamp, metadata }) => {
-    let msg = `\x1B[33m${timestamp}\x1b[0m [\x1B[33m${metadata[_default.truckKey]}\x1b[0m][${level}]: ${message} ${JSON.stringify(helper.redactor(metadata) || {})}`;
+    let msg = `\x1B[33m${timestamp}\x1b[0m ${metadata[_default.truckKey] ? `[\x1B[33m ${metadata[_default.truckKey]}\x1b[0m]` : ''}[${level}]: ${message} ${JSON.stringify(helper.redactor(metadata) || {})}`;
     return msg;
 });
+const _defaultCombine = () => combine(
+    metadata(),
+    colorize({ all: true }),
+    timestamp(),
+    _defaultPrintf,
+)
 
 const _pickRequest = ['httpVersion', 'headers', 'url', 'originalUrl', 'query', 'body'];
 /**
@@ -98,12 +104,7 @@ export function truckExpress(collection: string, options: truckOptionType = {}) 
     truckContainer.add(collection,
         options.useTruck ||
         _().merge({
-            format: combine(
-                metadata(),
-                colorize({ all: true }),
-                timestamp(),
-                _defaultPrintf,
-            ),
+            format: _defaultCombine(),
             transports,
             exitOnError: false,
         }, _.omit(options, ['winstonMongoDb', 'mongodb'])).value()
@@ -153,7 +154,6 @@ export function truckCrashed(err, req, res, next) {
     next(err);
 };
 
-
 /**
  * Trucker
  * @param {string} collection
@@ -167,3 +167,6 @@ export function truck(collection: string) {
     }
     return trucker();
 };
+
+exports.useTruck = winston;
+exports.useTruckFormat = _defaultCombine();
