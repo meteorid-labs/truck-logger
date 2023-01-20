@@ -154,7 +154,6 @@ export function truckCrashed(err, req, res, next) {
     next(err);
 };
 
-
 /**
  * Trucker
  * @param {string} collection
