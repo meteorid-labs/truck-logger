@@ -55,7 +55,7 @@ const _default = {
     }
 };
 const _defaultPrintf = printf(({ level, message, timestamp, metadata }) => {
-    let msg = `\x1B[33m${timestamp}\x1b[0m ${metadata[_default.truckKey] ? `[\x1B[33m ${metadata[_default.truckKey]}\x1b[0m]` : ''}[${level}]: ${message} ${JSON.stringify(helper.redactor(metadata) || {})}`;
+    let msg = `\x1B[33m${timestamp}\x1b[0m ${metadata[_default.truckKey] ? `[\x1B[33m${metadata[_default.truckKey]}\x1b[0m]` : ''}[${level}]: ${message} ${JSON.stringify(helper.redactor(metadata) || {})}`;
     return msg;
 });
 const _defaultCombine = () => combine(
@@ -73,7 +73,7 @@ const _pickRequest = ['httpVersion', 'headers', 'url', 'originalUrl', 'query', '
  */
 const generateMetaRequest = (req) => {
     const result = _().merge({
-        name: `HTTP ${req.method} ${req.url}`,
+        name: `HTTP ${req.method} ${req.originalUrl}`,
     }, _.pick(req, _pickRequest)).value();
     return { req: result }
 };
