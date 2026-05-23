@@ -31,7 +31,7 @@
     "klona": "^2.0.5",
     "lodash": "^4.17.21",
     "traverse": "^0.6.7",
-    "uuid": "^9.0.0",
+    "uuid": "^14.0.0",
     "winston": "^3.8.2",
     "winston-mongodb": "^5.1.0"
   },
